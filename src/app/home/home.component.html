@@ -1,0 +1,26 @@
+<h1>Clothes & Accessories for Men & Women</h1>
+
+<section class="product-grid">
+  <ng-container *ngFor="let product of productsList">
+
+    <!-- Check if the productsList is not empty -->
+
+    <div *ngIf="productsList.length > 0; else loading" class="product-card">
+      <div class="product-image">
+        <img [src]="product.preview" [alt]="product.name" />
+      </div>
+
+      <div class="product-details">
+        <h2 class="product-name">{{ product.name }}</h2>
+        <p class="product-brand">{{ product.brand }}</p>
+        <p class="product-price"> ₹{{ product.price }}</p>
+        <button class="view-details-btn">View Details</button>
+      </div>
+    </div>
+  </ng-container>
+
+  <!-- Loading -->
+  <ng-template #loading>
+    <div class="loading">Loading Products...</div>
+  </ng-template>
+</section>

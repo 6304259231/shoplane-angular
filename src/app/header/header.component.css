@@ -1,0 +1,39 @@
+nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 0.1rem;
+    margin: 0.4rem 1rem;
+}
+nav .nav-items{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 2rem;
+}
+.company-logo{
+    font-size: 2rem;
+    color: green;
+    font-family: 'Courier New', Courier, monospace;
+    width: 45%;
+    text-align: left;
+
+}
+
+.company-logo span{
+    position: relative;
+    right: 1rem;
+    color: tomato;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+nav .auth-btns{
+    display: flex;
+    gap: 0.8rem;
+}
+
+.nav-items p{
+    font-size: 1rem;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
