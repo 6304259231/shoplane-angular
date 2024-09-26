@@ -23,3 +23,14 @@
     opacity: 50%;
 
 }
+
+input.ng-dirty.ng-invalid{
+    border: 2px solid red;
+}
+
+form small{
+  display: block;
+  color: tomato;
+  font-size: 1rem;
+  font-family: 'Courier New', Courier, monospace;
+}

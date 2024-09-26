@@ -1,11 +1,9 @@
+import { LoginComponent } from './login/login.component';
 import { Component } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { SignupComponent } from './signup/signup.component';
-import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { Router, RouterOutlet } from '@angular/router';
-
-
+import { RouterOutlet } from '@angular/router';
 
 
 @Component({

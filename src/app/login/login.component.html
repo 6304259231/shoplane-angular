@@ -1,1 +1,34 @@
-<p>login works!</p>
+<form class="authform-section" ngForm #login="ngForm">
+    <h2 class="text-center mb-3">Login</h2>
+    <div class="form-floating mb-3">
+        <input type="email" class="form-control" name="email" placeholder="name@example.com" ngModel #email="ngModel" required email>
+        <label for="email">Email address</label>
+
+        <!-- for valiadtions erros starts-->
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger mt-2">
+            <small *ngIf="email.errors?.['required']" class="text-sm">Email is required.</small>
+            <small *ngIf="email.errors?.['email']" class="text-small">Please enter a valid email address.</small>
+        </div>
+        <!-- validations ends -->
+
+    </div>
+    <div class="form-floating mb-3">
+        <input type="password" class="form-control" name="password" placeholder="Password" ngModel #password="ngModel" required minlength="6">
+        <label for="password">Password</label>
+
+          <!-- for valiadtions erros starts-->
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger mt-2">
+            <small *ngIf="password.errors?.['required']" class="text-small">Password is required.</small>
+        </div>
+        <!-- validations ends -->
+
+    </div>
+   
+    <div class="d-flex gap-4 justify-content-center mt-3 mb-3">
+        <button type="submit" class="btn btn-success">Login</button>
+        <div class="signup-btns">
+            <span>New user go for</span>
+            <button type="button" class="btn btn-outline-warning">Signup</button>
+        </div>
+    </div> 
+</form>

@@ -1,56 +1,62 @@
-<form class="authform-section" ngForm #signup="ngForm" (ngSubmit)="onSubmit(signup)">
+<form class="authform-section" [formGroup]="signup">
     <h2 class="text-center mb-3">Signup</h2>
+
     <div class="form-floating mb-3">
-        <input type="email" class="form-control" name="email" placeholder="name@example.com" ngModel #email="ngModel" required email>
+        <input type="email" class="form-control" name="email" placeholder="name@example.com" required formControlName="email" email>
         <label for="email">Email address</label>
 
         <!-- for valiadtions erros starts-->
-        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="text-danger mt-2">
-            <small *ngIf="email.errors?.['required']" class="text-sm">Email is required.</small>
-            <small *ngIf="email.errors?.['email']" class="text-small">Please enter a valid email address.</small>
+        <div *ngIf="signup.get('email')?.invalid && signup.get('email')?.touched" class="text-danger mt-2">
+            <small *ngIf="signup?.get('email')?.hasError('required')" class="text-sm">Email is required.</small>
+            <small *ngIf="signup?.get('email')?.hasError('email')" class="text-small">Please enter a valid email address (ends with gmil.com)</small>
         </div>
         <!-- validations ends -->
-
     </div>
+
     <div class="form-floating mb-3">
-        <input type="password" class="form-control" name="password" placeholder="Password" ngModel #password="ngModel" required minlength="6">
+        <input type="password" class="form-control" name="password" placeholder="Password" required minlength="6" formControlName="password">
         <label for="password">Password</label>
 
           <!-- for valiadtions erros starts-->
-          <div *ngIf="password.invalid && (password.dirty || password.touched)" class="text-danger mt-2">
-            <small *ngIf="password.errors?.['required']" class="text-sm">Password is required.</small>
-            <small *ngIf="password.errors?.['minlength']" class="text-small">Please enter a atleast 6 characters.</small>
+        <div *ngIf="signup.get('password')?.invalid && signup.get('password')?.dirty" class="text-danger mt-2" class="valiadation-section">
+            <small *ngIf="signup.get('password')?.hasError('required')">Password is required.</small>
+            <small *ngIf="signup.get('password')?.hasError('minlength')">Minimum 8 characters</small>
+
+            <!-- custom validations -->
+            <small *ngIf="signup.get('password')?.hasError('noUpperCase')"> Atleast one Uppercase</small>
+            <small *ngIf="signup.get('password')?.hasError('noDigit')"> Atleast one Digit</small>
+            <small *ngIf="signup.get('password')?.hasError('noSpecialChar')"> Atleast one Special char (#/#/!/..etc)</small>
         </div>
         <!-- validations ends -->
 
     </div>
     <div class="form-floating mb-3">
-        <input type="password" class="form-control" name="confirmpassword" placeholder="confirm Password" ngModel #cnpassword="ngModel" required minlength="6">
+        <input type="password" class="form-control" name="confirmpassword" placeholder="confirm Password" required minlength="6" formControlName="cnpassword">
         <label for="password">Confirm password</label>
 
          <!-- for valiadtions erros starts-->
-         <div *ngIf="cnpassword.invalid && (cnpassword.dirty || cnpassword.touched)" class="text-danger mt-2">
-            <small *ngIf="cnpassword.errors?.['required']" class="text-sm">Conform Password is required.</small>
-            <small *ngIf="cnpassword.errors?.['minlength']" class="text-small">Please enter a atleast 6 characters.</small>
+         <div *ngIf="signup.get('cnpassword')?.invalid && (signup.get('cnpassword')?.dirty || signup.get('cnpassword')?.touched)" class="text-danger mt-2">
+            <small *ngIf="signup.get('cnpassword')?.hasError('required')" class="text-sm">Confirm Password is required.</small>
+            <small *ngIf="signup?.errors?.['noPasswordMatch']" class="text-small">Password isn't matched</small>
         </div>
         <!-- validations ends -->
-
     </div>
+
     <div class="form-floating">
-        <input type="tel" class="form-control" name="mobile" placeholder="Mobile" ngModel #mobile="ngModel"  required minlength="10" >
+        <input type="tel" class="form-control" name="mobile" placeholder="Mobile" required minlength="10" formControlName="mobile">
         <label for="mobile">Mobile</label>
 
-                <!-- for valiadtions erros starts-->
-                <div *ngIf="mobile.invalid && (mobile.dirty || mobile.touched)" class="text-danger mt-2">
-                    <small *ngIf="mobile.errors?.['required']" class="text-sm">Mobile number is required.</small>
-                    <small *ngIf="mobile.errors?.['minlength']" class="text-small">Please enter a valid mobile having 10 numbers</small>
-                </div>
+            <!-- for valiadtions erros starts-->
+            <div *ngIf="signup.get('mobile')?.invalid && signup.get('mobile')?.dirty" class="text-danger mt-2">
+                <small *ngIf="signup.get('mobile')?.hasError('required')" class="text-sm">Mobile number is required.</small>
+                <small *ngIf="signup.get('mobile')?.hasError('minlength')" class="text-small">Atleast 10 numbers</small>
+            </div>
                 <!-- validations ends -->
     </div>
     <div class="d-flex gap-4 justify-content-center mt-3 mb-3">
-        <button type="submit" class="btn btn-success">Signup</button>
+        <button type="submit" class="btn btn-success" (click)="show()">Signup</button>
         <div class="signup-btns">
-            <small>Already user go for</small>
+            <span>Already have an account! go for</span>
             <button type="button" class="btn btn-outline-warning">Login</button>
         </div>
     </div> 
