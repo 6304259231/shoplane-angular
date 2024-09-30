@@ -6,7 +6,7 @@
         <label for="email">Email address</label>
 
         <!-- for valiadtions erros starts-->
-        <div *ngIf="signup.get('email')?.invalid && signup.get('email')?.touched" class="text-danger mt-2">
+        <div *ngIf="signup.get('email')?.invalid && signup.get('email')?.dirty" class="text-danger mt-2">
             <small *ngIf="signup?.get('email')?.hasError('required')" class="text-sm">Email is required.</small>
             <small *ngIf="signup?.get('email')?.hasError('email')" class="text-small">Please enter a valid email address (ends with gmil.com)</small>
         </div>
@@ -35,7 +35,7 @@
         <label for="password">Confirm password</label>
 
          <!-- for valiadtions erros starts-->
-         <div *ngIf="signup.get('cnpassword')?.invalid && (signup.get('cnpassword')?.dirty || signup.get('cnpassword')?.touched)" class="text-danger mt-2">
+         <div *ngIf="signup.get('cnpassword')?.invalid && (signup.get('cnpassword')?.dirty)" class="text-danger mt-2">
             <small *ngIf="signup.get('cnpassword')?.hasError('required')" class="text-sm">Confirm Password is required.</small>
             <small *ngIf="signup?.errors?.['noPasswordMatch']" class="text-small">Password isn't matched</small>
         </div>

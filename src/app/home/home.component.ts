@@ -1,50 +1,37 @@
-import { Component , OnInit } from '@angular/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { Component, OnInit  } from '@angular/core';
+import { ProductsService } from '../products.service';
 import { CommonModule } from '@angular/common';
-
-
-
-interface Product {
-  id: string;
-  name: string;
-  preview: string;
-  photos: string[];
-  description: string;
-  isAccessory: boolean;
-  brand: string;
-  price: number;
-}
+import { Product } from '../product.model';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
+  imports: [CommonModule] 
 })
+export class HomeComponent implements OnInit {
+  productsList: Product[] = [];
+  isLoading: boolean = false;
 
+  constructor(private productsService: ProductsService) {}
 
-export class HomeComponent {
-  private URI: string = "https://5d76bf96515d1a0014085cf9.mockapi.io/product";
-
-  productsList : Product[] = [];
-  constructor(private http:HttpClient){
-
+  ngOnInit() {
+    this.fetchData();
   }
 
-  ngOnInit(){
-    this.fecthData()
+  fetchData() {
+    // Subscribe to the Observable provided by the service
+    this.isLoading = true;
+    this.productsService.getProducts().subscribe(
+      (data: Product[]) => {
+        this.productsList = data;
+        this.isLoading = false;
+      },
+      (error) => {
+        console.error('Error:', error);
+        this.isLoading = false;
+      }
+    );
   }
-
-  fecthData(){
-     this.http.get<Product[]>(this.URI)
-     .subscribe((data : Product[])=>{
-       return this.productsList = data;
-     }, (error)=>{
-      console.error('Error:', error); 
-     }
-    )
-  }
-
-
 }

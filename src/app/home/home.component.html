@@ -5,11 +5,10 @@
 
     <!-- Check if the productsList is not empty -->
 
-    <div *ngIf="productsList.length > 0; else loading" class="product-card">
+    <div *ngIf="productsList.length > 0;" class="product-card">
       <div class="product-image">
         <img [src]="product.preview" [alt]="product.name" />
       </div>
-
       <div class="product-details">
         <h2 class="product-name">{{ product.name }}</h2>
         <p class="product-brand">{{ product.brand }}</p>
@@ -20,7 +19,7 @@
   </ng-container>
 
   <!-- Loading -->
-  <ng-template #loading>
+  <ng-template *ngIf="isLoading">
     <div class="loading">Loading Products...</div>
   </ng-template>
 </section>
